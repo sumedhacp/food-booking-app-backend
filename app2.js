@@ -25,19 +25,17 @@ mongoose.connect("mongodb://sumedha:sumu123@ac-nr9nhaz-shard-00-00.jv4x88s.mongo
 const Stall = mongoose.model("Stalls", new mongoose.Schema(
 
     {
-        bookingId: String,
-        petName: String,
-        petType: String,
-        breed: String,
-        age: String,
-        weightKg: String,
-        vaccinationStatus: String,
-        ownerName: String,
-        ownerPhone: String,
-        ownerEmail: String,
-        checkInDate: String,
-        checkOutDate: String,
-        kennelNumber: String
+        menuid: String,
+        vendorid: String,
+        vendorname: String,
+        fooditem: String,
+        foodcategory: String,
+        cuisinetype: String,
+        price: String,
+        availabilitystatus: String,
+        specialoffer: String,
+        foodimage: String,
+       
     }
 
 ))
