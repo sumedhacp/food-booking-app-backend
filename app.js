@@ -23,7 +23,7 @@ mongoose.connect("mongodb://sumedha:sumu123@ac-nr9nhaz-shard-00-00.jv4x88s.mongo
 )
 
 const Food = mongoose.model("Foods", new mongoose.Schema(
-    
+
     {
         menuId: String,
         vendorId: String,
@@ -52,6 +52,76 @@ app.post("/view-food", async (request, response) => {
     const Foods = await Food.find()
 
     response.json(Foods)
+
+})
+
+const Vendor = mongoose.model("Vendors", new mongoose.Schema(
+
+    {
+        bookingId: String,
+        petName: String,
+        petType: String,
+        breed: String,
+        age: String,
+        weightKg: String,
+        vaccinationStatus: String,
+        ownerName: String,
+        ownerPhone: String,
+        ownerEmail: String,
+        checkInDate: String,
+        checkOutDate: String,
+        kennelNumber: String
+    }
+
+))
+
+app.post("/add-vendor", async (request, response) => {
+
+    await Vendor.create(request.body)
+
+    response.json({ "status": "success" })
+
+})
+
+app.post("/view-vendor", async (request, response) => {
+
+    const Vendors = await Vendor.find()
+
+    response.json(Vendors)
+
+})
+
+const Stall = mongoose.model("Stalls", new mongoose.Schema(
+
+    {
+        bookingid: String,
+        vendorid: String,
+        vendorname: String,
+        stallno: String,
+        bookingdate: String,
+        bookigno: String,
+        rentalamount: String,
+        paymentstatus: String,
+        bookingstatus: String,
+        festivalday: String,
+       
+    }
+
+))
+
+app.post("/add-stall", async (request, response) => {
+
+    await Stall.create(request.body)
+
+    response.json({ "status": "success" })
+
+})
+
+app.post("/view-stall", async (request, response) => {
+
+    const stalls = await Stall.find()
+
+    response.json(stalls)
 
 })
 
