@@ -25,19 +25,19 @@ mongoose.connect("mongodb://sumedha:sumu123@ac-nr9nhaz-shard-00-00.jv4x88s.mongo
 const Vendor = mongoose.model("Vendors", new mongoose.Schema(
 
     {
-        bookingId: String,
-        petName: String,
-        petType: String,
-        breed: String,
-        age: String,
-        weightKg: String,
-        vaccinationStatus: String,
-        ownerName: String,
-        ownerPhone: String,
-        ownerEmail: String,
-        checkInDate: String,
-        checkOutDate: String,
-        kennelNumber: String
+        vendorid: String,
+        vendorname: String,
+        ownername: String,
+        phonenumber: String,
+        email: String,
+        businessname: String,
+        foodcategory: String,
+        cuisinetype: String,
+        numberofstaff: String,
+        licensenumber: String,
+        bookingdate: String,
+        paymentstatus: String,
+        stallnumber: String
     }
 
 ))
