@@ -25,16 +25,16 @@ mongoose.connect("mongodb://sumedha:sumu123@ac-nr9nhaz-shard-00-00.jv4x88s.mongo
 const Stall = mongoose.model("Stalls", new mongoose.Schema(
 
     {
-        menuid: String,
+        bookingid: String,
         vendorid: String,
         vendorname: String,
-        fooditem: String,
-        foodcategory: String,
-        cuisinetype: String,
-        price: String,
-        availabilitystatus: String,
-        specialoffer: String,
-        foodimage: String,
+        stallno: String,
+        bookingdate: String,
+        bookigno: String,
+        rentalamount: String,
+        paymentstatus: String,
+        bookingstatus: String,
+        festivalday: String,
        
     }
 
