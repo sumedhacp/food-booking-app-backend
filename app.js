@@ -1,132 +1,66 @@
-const express = require("express")
-const mongoose = require("mongoose")
-const cors = require("cors")
+require("dotenv").config();
 
-const app = express()
-app.use(cors())
-app.use(express.json())
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
 
-mongoose.connect("mongodb://sumedha:sumu123@ac-nr9nhaz-shard-00-00.jv4x88s.mongodb.net:27017,ac-nr9nhaz-shard-00-01.jv4x88s.mongodb.net:27017,ac-nr9nhaz-shard-00-02.jv4x88s.mongodb.net:27017/fooddb?ssl=true&replicaSet=atlas-11vj1p-shard-0&authSource=admin&appName=Cluster0").then(
+const {
+  createFood,
+  getFoods,
+  updateFood,
+  deleteFood,
+  searchFood
+} = require("./controllers/foodController");
 
-    () => {
-        console.log("MongoDB Connected")
-    }
+const {
+  createVendor,
+  getVendors,
+  updateVendor,
+  deleteVendor,
+  searchVendor
+} = require("./controllers/vendorController");
 
-).catch(
+const {
+  createStall,
+  getStalls,
+  updateStall,
+  deleteStall,
+  searchStall
+} = require("./controllers/stallController");
 
-    (error) => {
+const app = express();
+app.use(cors());
+app.use(express.json());
 
-        console.log(error)
+const PORT = process.env.PORT || 3000;
 
-    }
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log("MongoDB Connected");
+  })
+  .catch((error) => {
+    console.error("MongoDB connection failed:", error.message);
+  });
 
-)
+app.post("/add-food", createFood);
+app.post("/view-food", getFoods);
+app.post("/update-food", updateFood);
+app.post("/delete-food", deleteFood);
+app.post("/search-food", searchFood);
 
-const Food = mongoose.model("Foods", new mongoose.Schema(
+app.post("/add-vendor", createVendor);
+app.post("/view-vendor", getVendors);
+app.post("/update-vendor", updateVendor);
+app.post("/delete-vendor", deleteVendor);
+app.post("/search-vendor", searchVendor);
 
-    {
-        menuId: String,
-        vendorId: String,
-        vendorName: String,
-        foodItemName: String,
-        foodCategory: String,
-        cuisineType: String,
-        price: String,
-        availabilityStatus: String,
-        specialOffer: String,
-        foodImageUrl: String
-    }
+app.post("/add-stall", createStall);
+app.post("/view-stall", getStalls);
+app.post("/update-stall", updateStall);
+app.post("/delete-stall", deleteStall);
+app.post("/search-stall", searchStall);
 
-))
-
-app.post("/add-food", async (request, response) => {
-
-    await Food.create(request.body)
-
-    response.json({ "status": "success" })
-
-})
-
-app.post("/view-food", async (request, response) => {
-
-    const Foods = await Food.find()
-
-    response.json(Foods)
-
-})
-
-const Vendor = mongoose.model("Vendors", new mongoose.Schema(
-
-    {
-        bookingId: String,
-        petName: String,
-        petType: String,
-        breed: String,
-        age: String,
-        weightKg: String,
-        vaccinationStatus: String,
-        ownerName: String,
-        ownerPhone: String,
-        ownerEmail: String,
-        checkInDate: String,
-        checkOutDate: String,
-        kennelNumber: String
-    }
-
-))
-
-app.post("/add-vendor", async (request, response) => {
-
-    await Vendor.create(request.body)
-
-    response.json({ "status": "success" })
-
-})
-
-app.post("/view-vendor", async (request, response) => {
-
-    const Vendors = await Vendor.find()
-
-    response.json(Vendors)
-
-})
-
-const Stall = mongoose.model("Stalls", new mongoose.Schema(
-
-    {
-        bookingid: String,
-        vendorid: String,
-        vendorname: String,
-        stallno: String,
-        bookingdate: String,
-        bookigno: String,
-        rentalamount: String,
-        paymentstatus: String,
-        bookingstatus: String,
-        festivalday: String,
-       
-    }
-
-))
-
-app.post("/add-stall", async (request, response) => {
-
-    await Stall.create(request.body)
-
-    response.json({ "status": "success" })
-
-})
-
-app.post("/view-stall", async (request, response) => {
-
-    const stalls = await Stall.find()
-
-    response.json(stalls)
-
-})
-
-app.listen(3000, () => {
-
-    console.log("server started")
-
-})
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
+});
