@@ -1,22 +1,21 @@
 const mongoose = require("mongoose");
 
-const vendorSchema = new mongoose.Schema(
-  {
-    bookingId: { type: String, required: true },
-    petName: { type: String, required: true },
-    petType: { type: String, required: true },
-    breed: { type: String, required: true },
-    age: { type: String, required: true },
-    weightKg: { type: String, required: true },
-    vaccinationStatus: { type: String, required: true },
-    ownerName: { type: String, required: true },
-    ownerPhone: { type: String, required: true },
-    ownerEmail: { type: String, required: true },
-    checkInDate: { type: String, required: true },
-    checkOutDate: { type: String, required: true },
-    kennelNumber: { type: String, required: true }
-  },
-  { timestamps: true }
-);
+const vendorSchema = new mongoose.Schema({
+  vendorId: { type: String, required: true },
+  vendorName: { type: String, required: true },
+  ownerName: { type: String, required: true },
+  phoneNumber: { type: String, required: true },
+  email: { type: String, required: true },
+  businessName: { type: String, required: true },
+  foodCategory: { type: String, required: true },
+  cuisineType: { type: String, required: true },
+  numberOfStaff: { type: Number, required: true },
+  licenseNumber: { type: String, required: true },
+  bookingDate: { type: String, required: true },
+  paymentStatus: { type: String, required: true },
+  stallNumber: { type: String, required: true }
+});
 
-module.exports = mongoose.model("Vendor", vendorSchema, "Vendors");
+module.exports = mongoose.model("Vendor", vendorSchema);
+
+/*module.exports = mongoose.model("Vendor", vendorSchema, "Vendors");*/
